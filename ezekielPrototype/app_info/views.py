@@ -1,28 +1,20 @@
-from django.shortcuts import render, get_object_or_404
-from django.views import View
+from django.views.generic import ListView, DetailView
 
-from app_info.models import User
-
-
-class UserList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'app_info/user_list.html',
-            {'user_list': User.objects.all()}
-        )
+from app_info.models import Profile, Post
 
 
-class UserDetail(View):
+class ProfileList(ListView):
+    model = Profile
 
-    def get(self, request, pk):
-        user = get_object_or_404(
-            User,
-            pk=pk
-        )
-        return render(
-            request,
-            'app_info/user_detail.html',
-            {'user': user}
-        )
+
+class ProfileDetail(DetailView):
+    model = Profile
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        profile = self.get_object()
+
+        posts = profile.posts.all()
+        context['posts'] = posts
+
+        return context

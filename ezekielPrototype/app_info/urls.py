@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from app_info.views import UserList, UserDetail
+from app_info.views import ProfileList, ProfileDetail
 
 urlpatterns = [
-    path('users/',
-         UserList.as_view(),
-         name='app_info_user_list_urlpattern'),
-    path('users/<int:pk>',
-         UserDetail.as_view(),
-         name='app_info_user_detail_urlpattern'),
+    path('profiles/',
+         ProfileList.as_view(),
+         name='app_info_profile_list_urlpattern'),
+    path('profiles/<int:pk>/',
+         ProfileDetail.as_view(),
+         name='app_info_profile_detail_urlpattern'),
 ]
