@@ -21,6 +21,10 @@
                 <th>Join Date:</th>
                 <td>{{ profile.join_date }}</td>
             </tr>
+            <tr>
+                <th>Belt Color:</th>
+                <td>{{ profile.belt_color }}</td>
+            </tr>
         </table>
     </section>
 
@@ -30,7 +34,6 @@
         <img src="{{ profile.profile_picture.url }}" class="img-responsive" style="width: 10%; float: left; margin-right: 10px;" />
         <h4>Banner Picture</h4>
         <img src="{{ profile.banner_picture.url }}" class="img-responsive" style="width: 10%; float: left; margin-right: 10px;" />
-        <div>Belt Color: {{ profile.belt_color }}</div>
         <ul>
         {% for post in posts %}
             <li>

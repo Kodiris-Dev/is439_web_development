@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from app_info.views import ProfileList, ProfileDetail
+from app_info.views import ProfileList, ProfileDetail, PostList, PostDetail, CategoryList, CategoryDetail
 
 urlpatterns = [
     path('profiles/',
@@ -25,4 +25,16 @@ urlpatterns = [
     path('profiles/<int:pk>/',
          ProfileDetail.as_view(),
          name='app_info_profile_detail_urlpattern'),
+    path('all_posts/',
+         PostList.as_view(),
+         name='app_info_post_list_urlpattern'),
+    path('posts/<int:pk>/',
+         PostDetail.as_view(),
+         name='app_info_post_detail_urlpattern'),
+    path('categories/',
+         CategoryList.as_view(),
+         name='app_info_categories_list_urlpattern'),
+    path('categories/<int:pk>/',
+         CategoryDetail.as_view(),
+         name='app_info_categories_detail_urlpattern'),
 ]

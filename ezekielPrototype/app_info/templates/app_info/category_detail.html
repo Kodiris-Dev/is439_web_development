@@ -1,0 +1,27 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    {{ category.name }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ category.name }} Posts:</h2>
+
+    <section>
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        {% for post in posts %}
+                        <li>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        </li>
+                        {% empty %}
+                        <li><em>There are no posts for this category</em></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+{% endblock %}

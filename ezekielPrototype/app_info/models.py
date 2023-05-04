@@ -56,10 +56,10 @@ class Category(models.Model):
     def __str__(self):
         return '%s' % (self.name)
 
-    # def get_absolute_url(self):
-    #     return reverse('app_info_category_detail_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_absolute_url(self):
+        return reverse('app_info_categories_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['name']
@@ -81,10 +81,10 @@ class Post(models.Model):
     def __str__(self):
         return '%s, %s' % (self.title, self.subtitle)
 
-    # def get_absolute_url(self):
-    #     return reverse('app_info_post_detail_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_absolute_url(self):
+        return reverse('app_info_post_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['title']

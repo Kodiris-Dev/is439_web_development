@@ -1,0 +1,18 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Categories
+{% endblock %}
+
+{% block content %}
+<h2>Category List</h2>
+<ul>
+    {% for category in category_list %}
+    <li>
+        <a href="{{ category.get_absolute_url }}">{{ category }}</a>
+    </li>
+    {% empty %}
+    <li><em>There are currently no categories available</em></li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Post - {{ post.title }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ post.title }}</h2>
+    <h3>{{ post.subtitle }}</h3>
+
+    <section>
+        <table>
+            <tr>
+                <th>First Name:</th>
+                <td>{{ post.profile.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td>{{ post.profile.last_name }}</td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td>{{ post.created_at }}</td>
+            </tr>
+            <tr>
+                <th>Last Updated:</th>
+                <td>{{ post.updated_at }}</td>
+            </tr>
+            <tr>
+                <th>Likes:</th>
+                <td>{{ post.likes }}</td>
+            </tr>
+            <tr>
+                <th>Category:</th>
+                <td>{{ post.categories }}</td>
+            </tr>
+            <tr>
+                <th>Tags:</th>
+                <td>
+                    <ul>
+                        {% for tag in tags %}
+                        <li>
+                            <a href="">{{ tag.name }}</a>
+                        </li>
+                        {% empty %}
+                        <li><em>There are no tags for this post</em></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <img src="{{ post.image.url }}" class="img-responsive" style="width: 10%; float: left; margin-right: 10px;" />
+        <div>{{ post.text }}</div>
+        <ul>
+            {% for comment in comments %}
+            <li>
+                <a href="">{{ comment.text }}</a>
+            </li>
+            {% empty %}
+            <li><em>There are no comments for this post</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
