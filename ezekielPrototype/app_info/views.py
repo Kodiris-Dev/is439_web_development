@@ -298,6 +298,35 @@ class BeltUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ''
 
 
+class BeltDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Belt
+    success_url = reverse_lazy('app_info_belt_list_urlpattern')
+    permission_required = ''
+
+    def get(self, request, pk):
+        belt = get_object_or_404(
+            Belt,
+            pk=pk)
+        profiles = belt.profiles.all()
+        belt_promotion_posts = belt.belt_promotion_posts.all()
+
+        if profiles.count() > 0 or belt_promotion_posts.count() > 0:
+            return render(
+                request,
+                'app_info/belt_refuse_delete.html',
+                {'belt': belt,
+                 'profiles': profiles,
+                 'belt_promotion_posts': belt_promotion_posts,
+                 }
+            )
+        else:
+            return render(
+                request,
+                'app_info/belt_confirm_delete.html',
+                {'belt': belt}
+            )
+
+
 class BeltPromotionPostList(ListView):
     model = BeltPromotionPost
 

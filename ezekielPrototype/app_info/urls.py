@@ -20,7 +20,7 @@ from app_info.views import ProfileList, ProfileDetail, PostList, PostDetail, Cat
     TagDetail, BeltList, BeltDetail, BeltPromotionPostList, BeltPromotionPostDetail, TechniqueList, TechniqueDetail, \
     BeltCreate, CategoryCreate, ProfileCreate, TagCreate, BeltPromotionPostCreate, TechniqueCreate, PostCreate, \
     ProfileUpdate, CategoryUpdate, TagUpdate, BeltUpdate, BeltPromotionPostUpdate, TechniqueUpdate, PostUpdate, \
-    PostDelete, ProfileDelete, BeltPromotionPostDelete, TechniqueDelete, CategoryDelete, TagDelete
+    PostDelete, ProfileDelete, BeltPromotionPostDelete, TechniqueDelete, CategoryDelete, TagDelete, BeltDelete
 
 urlpatterns = [
     path('profiles/',
@@ -95,6 +95,9 @@ urlpatterns = [
     path('belts/<int:pk>/update/',
          BeltUpdate.as_view(),
          name='app_info_belt_update_urlpattern'),
+    path('belts/<int:pk>/delete/',
+         BeltDelete.as_view(),
+         name='app_info_belt_delete_urlpattern'),
     path('belt_promotions/',
          BeltPromotionPostList.as_view(),
          name='app_info_belt_promotion_post_list_urlpattern'),

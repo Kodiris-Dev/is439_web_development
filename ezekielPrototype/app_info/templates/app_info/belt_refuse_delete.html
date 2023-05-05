@@ -1,0 +1,30 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Error Deleting Belt
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Belt</h2>
+        <p>
+            You may not delete belt {{ belt }}.  This
+            belt is currently being used by the following profiles and belt promotion posts:
+        </p>
+        <div>PROFILES</div>
+        <ul>
+            {% for profile in profiles %}
+            <li><a href="{{ profile.get_absolute_url }}">{{ profile }}</a></li>
+            {%  endfor %}
+        </ul>
+        <div>BELT PROMOTION POSTS</div>
+        <ul>
+            {% for belt_promotion_post in belt_promotion_posts %}
+            <li><a href="{{ belt_promotion_post.get_absolute_url }}">{{ belt_promotion_post }}</a></li>
+            {%  endfor %}
+        </ul>
+        <p>
+            Return to <a href="{% url 'app_info_belt_list_urlpattern' %}">Belt List</a>.
+        </p>
+    </div>
+{% endblock %}
