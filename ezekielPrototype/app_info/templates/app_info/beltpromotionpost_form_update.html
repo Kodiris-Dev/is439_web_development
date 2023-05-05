@@ -1,0 +1,16 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Update Belt Promotion Post
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ beltpromotionpost.get_update_url }}"
+        enctype='multipart/form-data'
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Belt Promotion Post</button>
+    </form>
+{% endblock %}

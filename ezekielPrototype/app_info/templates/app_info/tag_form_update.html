@@ -1,0 +1,16 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Update Tag
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ tag.get_update_url }}"
+        enctype='multipart/form-data'
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Tag</button>
+    </form>
+{% endblock %}

@@ -19,7 +19,7 @@ from django.urls import path
 from app_info.views import ProfileList, ProfileDetail, PostList, PostDetail, CategoryList, CategoryDetail, TagList, \
     TagDetail, BeltList, BeltDetail, BeltPromotionPostList, BeltPromotionPostDetail, TechniqueList, TechniqueDetail, \
     BeltCreate, CategoryCreate, ProfileCreate, TagCreate, BeltPromotionPostCreate, TechniqueCreate, PostCreate, \
-    ProfileUpdate
+    ProfileUpdate, CategoryUpdate, TagUpdate, BeltUpdate, BeltPromotionPostUpdate, TechniqueUpdate
 
 urlpatterns = [
     path('profiles/',
@@ -52,6 +52,9 @@ urlpatterns = [
     path('categories/create/',
          CategoryCreate.as_view(),
          name='app_info_category_create_urlpattern'),
+    path('categories/<int:pk>/update/',
+         CategoryUpdate.as_view(),
+         name='app_info_category_update_urlpattern'),
     path('tags/',
          TagList.as_view(),
          name='app_info_tag_list_urlpattern'),
@@ -61,6 +64,9 @@ urlpatterns = [
     path('tags/create/',
          TagCreate.as_view(),
          name='app_info_tag_create_urlpattern'),
+    path('tags/<int:pk>/update/',
+         TagUpdate.as_view(),
+         name='app_info_tag_update_urlpattern'),
     path('belts/',
          BeltList.as_view(),
          name='app_info_belt_list_urlpattern'),
@@ -70,6 +76,9 @@ urlpatterns = [
     path('belts/create/',
          BeltCreate.as_view(),
          name='app_info_belt_create_urlpattern'),
+    path('belts/<int:pk>/update/',
+         BeltUpdate.as_view(),
+         name='app_info_belt_update_urlpattern'),
     path('belt_promotions/',
          BeltPromotionPostList.as_view(),
          name='app_info_belt_promotion_post_list_urlpattern'),
@@ -79,6 +88,9 @@ urlpatterns = [
     path('belt_promotions/create/',
          BeltPromotionPostCreate.as_view(),
          name='app_info_belt_promotion_post_create_urlpattern'),
+    path('belt_promotions/<int:pk>/update/',
+         BeltPromotionPostUpdate.as_view(),
+         name='app_info_belt_promotion_post_update_urlpattern'),
     path('techniques/',
          TechniqueList.as_view(),
          name='app_info_technique_list_urlpattern'),
@@ -88,4 +100,7 @@ urlpatterns = [
     path('technique/create/',
          TechniqueCreate.as_view(),
          name='app_info_technique_create_urlpattern'),
+    path('technique/<int:pk>/update/',
+         TechniqueUpdate.as_view(),
+         name='app_info_technique_update_urlpattern'),
 ]

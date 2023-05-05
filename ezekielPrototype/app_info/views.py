@@ -148,6 +148,13 @@ class CategoryCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ''
 
 
+class CategoryUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    form_class = CategoryForm
+    model = Category
+    template_name = 'app_info/category_form_update.html'
+    permission_required = ''
+
+
 class TagList(ListView):
     model = Tag
 
@@ -174,6 +181,13 @@ class TagCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ''
 
 
+class TagUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    form_class = TagForm
+    model = Tag
+    template_name = 'app_info/tag_form_update.html'
+    permission_required = ''
+
+
 class BeltList(ListView):
     model = Belt
 
@@ -197,6 +211,13 @@ class BeltDetail(DetailView):
 class BeltCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = BeltForm
     model = Belt
+    permission_required = ''
+
+
+class BeltUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    form_class = BeltForm
+    model = Belt
+    template_name = 'app_info/belt_form_update.html'
     permission_required = ''
 
 
@@ -236,6 +257,13 @@ class BeltPromotionPostCreate(LoginRequiredMixin, PermissionRequiredMixin, Creat
     permission_required = ''
 
 
+class BeltPromotionPostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    form_class = BeltPromotionPostForm
+    model = BeltPromotionPost
+    template_name = 'app_info/beltpromotionpost_form_update.html'
+    permission_required = ''
+
+
 class TechniqueList(ListView):
     model = Technique
 
@@ -263,4 +291,11 @@ class TechniqueDetail(DetailView):
 class TechniqueCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = TechniqueForm
     model = Technique
+    permission_required = ''
+
+
+class TechniqueUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    form_class = TechniqueForm
+    model = Technique
+    template_name = 'app_info/technique_form_update.html'
     permission_required = ''

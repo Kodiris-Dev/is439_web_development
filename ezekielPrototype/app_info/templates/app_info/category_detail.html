@@ -6,7 +6,20 @@
 
 {% block content %}
     <h2>{{ category.name }} Posts:</h2>
-
+{#    {% if perms.app_info.change_course %}#}
+        <li>
+          <a
+              href="{{ category.get_update_url }}"
+              class="button button-primary">
+            Edit Category</a></li>
+{#        {% endif %}#}
+{#        {% if perms.courseinfo.delete_course %}#}
+        <li>
+          <a
+{#              href="{{ course.get_delete_url }}"#}
+              class="button button-primary">
+            Delete Category</a></li>
+{#    {% endif %}#}
     <section>
         <table>
             <tr>

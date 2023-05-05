@@ -6,7 +6,22 @@
 
 {% block content %}
     <h2>{{ beltpromotionpost.belt }}: {{ beltpromotionpost.profile }}</h2>
-
+    <ul class="inline">
+{#        {% if perms.courseinfo.change_course %}#}
+        <li>
+          <a
+              href="{{ beltpromotionpost.get_update_url }}"
+              class="button button-primary">
+            Edit Belt Promotion Post</a></li>
+{#        {% endif %}#}
+{#        {% if perms.courseinfo.delete_course %}#}
+        <li>
+          <a
+{#              href="{{ course.get_delete_url }}"#}
+              class="button button-primary">
+            Delete Belt Promotion Post</a></li>
+{#        {% endif %}#}
+    </ul>
     <section>
         <div>{{ beltpromotionpost.created_at }}</div>
         <div>{{ beltpromotionpost.likes }}</div>

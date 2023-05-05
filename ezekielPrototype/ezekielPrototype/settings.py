@@ -137,7 +137,8 @@ LOGIN_URL = reverse_lazy('login_urlpattern')
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
+USE_TZ = True
+TIME_ZONE = 'CST6CDT'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

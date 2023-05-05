@@ -17,6 +17,15 @@ class Belt(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_update_url(self):
+        return reverse('app_info_belt_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    # def get_delete_url(self):
+    #     return reverse('app_info_profile_delete_urlpattern',
+    #                    kwargs={'pk': self.pk}
+    #                    )
 
     class Meta:
         ordering = ['name']
@@ -66,6 +75,16 @@ class Tag(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_update_url(self):
+        return reverse('app_info_tag_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    # def get_delete_url(self):
+    #     return reverse('app_info_profile_delete_urlpattern',
+    #                    kwargs={'pk': self.pk}
+    #                    )
+
     class Meta:
         ordering = ['name']
 
@@ -81,6 +100,16 @@ class Category(models.Model):
         return reverse('app_info_categories_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
+
+    def get_update_url(self):
+        return reverse('app_info_category_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    # def get_delete_url(self):
+    #     return reverse('app_info_profile_delete_urlpattern',
+    #                    kwargs={'pk': self.pk}
+    #                    )
 
     class Meta:
         ordering = ['name']
@@ -143,6 +172,16 @@ class BeltPromotionPost(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_update_url(self):
+        return reverse('app_info_belt_promotion_post_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    # def get_delete_url(self):
+    #     return reverse('app_info_profile_delete_urlpattern',
+    #                    kwargs={'pk': self.pk}
+    #                    )
+
     class Meta:
         ordering = ['belt']
 
@@ -151,7 +190,7 @@ class Technique(models.Model):
     technique_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45)
     description = models.TextField(default='')
-    instructional_link = models.URLField()
+    youtube_embed_link = models.URLField()
     tag = models.ForeignKey(Tag, related_name='techniques', on_delete=models.PROTECT)
 
     def __str__(self):
@@ -161,6 +200,16 @@ class Technique(models.Model):
         return reverse('app_info_technique_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
+
+    def get_update_url(self):
+        return reverse('app_info_technique_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    # def get_delete_url(self):
+    #     return reverse('app_info_profile_delete_urlpattern',
+    #                    kwargs={'pk': self.pk}
+    #                    )
 
     class Meta:
         ordering = ['name']

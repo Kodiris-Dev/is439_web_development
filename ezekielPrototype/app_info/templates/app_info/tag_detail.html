@@ -6,7 +6,20 @@
 
 {% block content %}
     <h2>{{ tag.name }} Posts:</h2>
-
+{#    {% if perms.app_info.change_course %}#}
+        <li>
+          <a
+              href="{{ tag.get_update_url }}"
+              class="button button-primary">
+            Edit Tag</a></li>
+{#        {% endif %}#}
+{#        {% if perms.courseinfo.delete_course %}#}
+        <li>
+          <a
+{#              href="{{ course.get_delete_url }}"#}
+              class="button button-primary">
+            Delete Tag</a></li>
+{#    {% endif %}#}
     <section>
         <table>
             <tr>

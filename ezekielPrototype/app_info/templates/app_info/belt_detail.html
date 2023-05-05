@@ -6,7 +6,22 @@
 
 {% block content %}
     <h2>{{ belt.name }} Belt Profiles:</h2>
-
+    <ul class="inline">
+{#        {% if perms.courseinfo.change_course %}#}
+        <li>
+          <a
+              href="{{ belt.get_update_url }}"
+              class="button button-primary">
+            Edit Belt</a></li>
+{#        {% endif %}#}
+{#        {% if perms.courseinfo.delete_course %}#}
+        <li>
+          <a
+{#              href="{{ course.get_delete_url }}"#}
+              class="button button-primary">
+            Delete Course</a></li>
+{#        {% endif %}#}
+    </ul>
     <section>
         <table>
             <tr>

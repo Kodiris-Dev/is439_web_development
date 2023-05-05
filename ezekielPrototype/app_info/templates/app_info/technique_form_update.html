@@ -1,0 +1,16 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Update Technique
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ technique.get_update_url }}"
+        enctype='multipart/form-data'
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Technique</button>
+    </form>
+{% endblock %}
