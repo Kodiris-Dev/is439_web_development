@@ -34,6 +34,13 @@ div, h2, h3, em, li, span, label, td, th {
   color: gainsboro;
 }
 
+.page-content {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  flex-direction: column;
+}
+
 .text-center {
   display: -ms-flexbox;
   display: -webkit-box;

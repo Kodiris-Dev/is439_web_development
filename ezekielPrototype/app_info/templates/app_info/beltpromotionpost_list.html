@@ -6,6 +6,14 @@
 
 {% block content %}
 <h2>Belt Promotions Post List</h2>
+{% block create_button %}
+{#    {% if perms.courseinfo.add_instructor %}#}
+    <a
+            href="{% url 'app_info_belt_promotion_post_create_urlpattern' %}"
+            class="button button-primary">
+        Create New Belt Promotion Post</a>
+{#    {% endif %}#}
+{% endblock %}
 <h3>By Belt Color</h3>
 <ul>
     {% for belt_promotion in beltpromotionpost_list %}

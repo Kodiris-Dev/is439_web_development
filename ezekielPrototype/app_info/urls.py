@@ -18,7 +18,8 @@ from django.urls import path
 
 from app_info.views import ProfileList, ProfileDetail, PostList, PostDetail, CategoryList, CategoryDetail, TagList, \
     TagDetail, BeltList, BeltDetail, BeltPromotionPostList, BeltPromotionPostDetail, TechniqueList, TechniqueDetail, \
-    BeltCreate, CategoryCreate, ProfileCreate, TagCreate
+    BeltCreate, CategoryCreate, ProfileCreate, TagCreate, BeltPromotionPostCreate, TechniqueCreate, PostCreate, \
+    ProfileUpdate
 
 urlpatterns = [
     path('profiles/',
@@ -30,12 +31,18 @@ urlpatterns = [
     path('profiles/create/',
          ProfileCreate.as_view(),
          name='app_info_profile_create_urlpattern'),
+    path('profiles/<int:pk>/update/',
+         ProfileUpdate.as_view(),
+         name='app_info_profile_update_urlpattern'),
     path('all_posts/',
          PostList.as_view(),
          name='app_info_post_list_urlpattern'),
     path('posts/<int:pk>/',
          PostDetail.as_view(),
          name='app_info_post_detail_urlpattern'),
+    path('posts/create/',
+         PostCreate.as_view(),
+         name='app_info_post_create_urlpattern'),
     path('categories/',
          CategoryList.as_view(),
          name='app_info_categories_list_urlpattern'),
@@ -69,10 +76,16 @@ urlpatterns = [
     path('belt_promotions/<int:pk>/',
          BeltPromotionPostDetail.as_view(),
          name='app_info_belt_promotion_post_detail_urlpattern'),
+    path('belt_promotions/create/',
+         BeltPromotionPostCreate.as_view(),
+         name='app_info_belt_promotion_post_create_urlpattern'),
     path('techniques/',
          TechniqueList.as_view(),
          name='app_info_technique_list_urlpattern'),
     path('techniques/<int:pk>/',
          TechniqueDetail.as_view(),
          name='app_info_technique_detail_urlpattern'),
+    path('technique/create/',
+         TechniqueCreate.as_view(),
+         name='app_info_technique_create_urlpattern'),
 ]

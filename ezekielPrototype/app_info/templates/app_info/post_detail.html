@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    <section class="page-content">
     <h2>{{ post.title }}</h2>
     <h3>{{ post.subtitle }}</h3>
 
@@ -40,7 +41,7 @@
                     <ul>
                         {% for tag in tags %}
                         <li>
-                            <a href="">{{ tag.name }}</a>
+                            <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
                         </li>
                         {% empty %}
                         <li><em>There are no tags for this post</em></li>
@@ -52,16 +53,26 @@
     </section>
 
     <section>
-        <img src="{{ post.image.url }}" class="img-responsive" style="width: 10%; float: left; margin-right: 10px;" />
+        <img src="{{ post.image.url }}" class="img-responsive" style="width: 200px; height: 100px;" />
+    </section>
+    <section>
         <div>{{ post.text }}</div>
-        <ul>
+    </section>
+    <section>
+        <h3>COMMENTS</h3>
+            <ul>
             {% for comment in comments %}
             <li>
-                <a href="">{{ comment.text }}</a>
+                <a href="">{{ comment.text }} by: {{ comment.profile.username }}</a>
             </li>
             {% empty %}
             <li><em>There are no comments for this post</em></li>
             {% endfor %}
         </ul>
+    </section>
+    {% if user.is_authenticated %}
+    {% include 'app_info/comment_form.html' %}
+
+    {% endif %}
     </section>
 {% endblock %}

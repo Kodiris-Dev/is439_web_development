@@ -1,0 +1,16 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Create Technique Page
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'app_info_technique_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+        Create Technique</button>
+    </form>
+{% endblock %}

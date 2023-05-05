@@ -1,11 +1,11 @@
 {% extends 'app_info/base.html' %}
 
 {% block title %}
-    Profile - {{ profile.displayName }}
+    Profile - {{ profile.username }}
 {% endblock %}
 
 {% block content %}
-    <h2>{{ profile.displayName }}</h2>
+    <h2>{{ profile.username }}</h2>
 
     <section>
         <table>
@@ -25,6 +25,10 @@
                 <th>Belt:</th>
                 <td>{{ profile.belt.name }}</td>
             </tr>
+            <tr>
+                <th>Admin:</th>
+                <td>{{ profile.is_superuser}}</td>
+            </tr>
         </table>
     </section>
 
@@ -37,11 +41,28 @@
         <ul>
         {% for post in posts %}
             <li>
-                <a href="">{{ post }}</a>
+                <a href="{{ post.get_absolute_url }}">{{ post }}</a>
             </li>
         {% empty %}
             <li><em>This user has no posts.</em></li>
         {% endfor %}
     </ul>
     </section>
+        <ul class="inline">
+{#        {% if perms.courseinfo.change_course %}#}
+            {% if user.is_authenticated and profile == user %}
+        <li>
+          <a
+              href="{{ profile.get_update_url }}"
+              class="button button-primary">
+            Update Profile</a></li>
+        {% endif %}
+{#        {% if perms.courseinfo.delete_course %}#}
+        <li>
+          <a
+              href="{{ profile.get_delete_url }}"
+              class="button button-primary">
+            Delete Profile</a></li>
+{#        {% endif %}#}
+    </ul>
 {% endblock %}

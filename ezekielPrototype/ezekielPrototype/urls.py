@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 from django.views.generic import RedirectView, TemplateView
 
@@ -29,6 +30,14 @@ urlpatterns = [
          TemplateView.as_view(
              template_name='app_info/home.html'),
          name='home_urlpattern'
+         ),
+    path('login/',
+         LoginView.as_view(template_name='app_info/login.html'),
+         name='login_urlpattern'
+         ),
+    path('logout/',
+         LogoutView.as_view(),
+         name='logout_urlpattern'
          ),
     path('', include('app_info.urls'))
 ]

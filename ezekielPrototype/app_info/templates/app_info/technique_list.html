@@ -6,6 +6,14 @@
 
 {% block content %}
 <h2>Technique List</h2>
+{% block create_button %}
+{#    {% if perms.courseinfo.add_instructor %}#}
+    <a
+            href="{% url 'app_info_technique_create_urlpattern' %}"
+            class="button button-primary">
+        Create New Technique</a>
+{#    {% endif %}#}
+{% endblock %}
 <ul>
     {% for technique in technique_list %}
     <li>

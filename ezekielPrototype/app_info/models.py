@@ -25,7 +25,6 @@ class Belt(models.Model):
 class Profile(AbstractUser):
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_id = models.AutoField(primary_key=True)
-    displayName = models.CharField(max_length=45, default="")
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
     join_date = models.DateTimeField(default=timezone.now)
@@ -40,6 +39,16 @@ class Profile(AbstractUser):
         return reverse('app_info_profile_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
+
+    def get_update_url(self):
+        return reverse('app_info_profile_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    # def get_delete_url(self):
+    #     return reverse('app_info_profile_delete_urlpattern',
+    #                    kwargs={'pk': self.pk}
+    #                    )
 
     class Meta:
         ordering = ['first_name']
@@ -83,7 +92,7 @@ class Post(models.Model):
     image = models.ImageField(default="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField()
+    likes = models.IntegerField(default=0)
     title = models.CharField(max_length=45)
     subtitle = models.CharField(max_length=45)
     profile = models.ForeignKey(Profile, related_name='posts', on_delete=models.CASCADE)
@@ -122,7 +131,7 @@ class BeltPromotionPost(models.Model):
     image = models.ImageField(default="")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField()
+    likes = models.IntegerField(default=0)
     profile = models.ForeignKey(Profile, related_name='belt_promotion_posts', on_delete=models.CASCADE)
     belt = models.ForeignKey(Belt, related_name="belt_promotion_posts", on_delete=models.CASCADE)
 

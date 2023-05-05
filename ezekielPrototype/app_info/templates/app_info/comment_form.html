@@ -1,0 +1,12 @@
+
+{% block content_comment %}
+    <form
+{#        action="{% url 'app_info_profile_detail_urlpattern'%}"#}
+        enctype='multipart/form-data'
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+        Add Comment</button>
+    </form>
+{% endblock %}

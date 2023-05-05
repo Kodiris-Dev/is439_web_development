@@ -33,7 +33,7 @@
             <ul class="navbar-nav me-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'app_info_profile_list_urlpattern' %}">
-                    Profiles</a></li>
+                    All Profiles</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'app_info_post_list_urlpattern' %}">
                     All Posts</a>
@@ -69,10 +69,21 @@
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'app_info_profile_create_urlpattern'%}">Sign Up</a>
+                    {% if user.is_authenticated %}
+                    <li><a class="nav-link" href="{{ user.get_absolute_url }}">
+                        {{ user.username }}</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{% url 'app_info_profile_create_urlpattern'%}">Sign Up</a></li>
+                {% endif %}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    {% if user.is_authenticated %}
+                    <li><a class="nav-link" href="{% url 'logout_urlpattern' %}">
+                        Log Out</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{% url 'login_urlpattern' %}">
+                        Login</a></li>
+                {% endif %}
                 </li>
             </ul>
         </div>

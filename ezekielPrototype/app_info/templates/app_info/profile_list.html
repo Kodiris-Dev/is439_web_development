@@ -9,7 +9,7 @@
 <ul>
     {% for profile in profile_list %}
     <li>
-        <a href="{{ profile.get_absolute_url }}">{{ profile }}</a>
+        <a href="{{ profile.get_absolute_url }}">{{ profile.username }}</a>
     </li>
     {% empty %}
     <li><em>There are currently no profile available</em></li>
