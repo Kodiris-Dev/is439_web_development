@@ -25,6 +25,7 @@
           {% if user.is_authenticated and profile == user %}
          <div class=" d-flex mt-2">
              <button onclick="window.location.href='{{ profile.get_update_url }}';" class="btn1 btn-dark">Edit Profile</button>
+             <button onclick="window.location.href='{{ profile.get_delete_url }}';" class="btn1 btn-dark">Delete Profile</button>
          </div>
           {% endif %}
          <div class="text mt-3">

@@ -1,0 +1,25 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Error Deleting Category
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Category</h2>
+        <p>
+            You may not delete category {{ category }}.  This
+            category is currently being used by the following posts:
+        </p>
+
+        <ul>
+            {% for post in posts %}
+            <li><a href="{{ post.get_absolute_url }}">{{ post }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'app_info_category_list_urlpattern' %}">Category List</a>.
+        </p>
+    </div>
+{% endblock %}

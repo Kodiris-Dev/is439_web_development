@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.views.generic.edit import FormMixin, UpdateView
+from django.views.generic.edit import FormMixin, UpdateView, DeleteView
 
 from app_info.forms import BeltForm, CategoryForm, ProfileForm, TagForm, BeltPromotionPostForm, TechniqueForm, PostForm, \
     CommentForm
@@ -35,9 +36,11 @@ class ProfileCreate(CreateView):
 
     def form_valid(self, form):
         valid = super(ProfileCreate, self).form_valid(form)
+        user_group = Group.objects.get(name="user")
         username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
         new_user = authenticate(username=username, password=password)
         login(self.request, new_user)
+        new_user.groups.add(user_group)
         return valid
 
 
@@ -45,7 +48,7 @@ class ProfileUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = ProfileForm
     model = Profile
     template_name = 'app_info/profile_form_update.html'
-    permission_required = ''
+    permission_required = 'app_info.change_profile'
 
     def form_valid(self, form):
         valid = super(ProfileUpdate, self).form_valid(form)
@@ -53,6 +56,12 @@ class ProfileUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         new_user = authenticate(username=username, password=password)
         login(self.request, new_user)
         return valid
+
+
+class ProfileDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Profile
+    success_url = reverse_lazy('app_info_profile_list_urlpattern')
+    permission_required = 'app_info.delete_profile'
 
 
 class PostList(ListView):
@@ -131,6 +140,12 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ''
 
 
+class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('app_info_post_list_urlpattern')
+    permission_required = ''
+
+
 class CategoryList(ListView):
     model = Category
 
@@ -164,6 +179,32 @@ class CategoryUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ''
 
 
+class CategoryDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Category
+    success_url = reverse_lazy('app_info_category_list_urlpattern')
+    permission_required = ''
+
+    def get(self, request, pk):
+        category = get_object_or_404(
+            Category,
+            pk=pk)
+        posts = category.posts.all()
+        if posts.count() > 0:
+            return render(
+                request,
+                'app_info/category_refuse_delete.html',
+                {'category': category,
+                 'posts': posts,
+                 }
+            )
+        else:
+            return render(
+                request,
+                'app_info/category_confirm_delete.html',
+                {'category': category}
+            )
+
+
 class TagList(ListView):
     model = Tag
 
@@ -195,6 +236,33 @@ class TagUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Tag
     template_name = 'app_info/tag_form_update.html'
     permission_required = ''
+
+
+class TagDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Tag
+    success_url = reverse_lazy('app_info_tag_list_urlpattern')
+    permission_required = ''
+
+    def get(self, request, pk):
+        tag = get_object_or_404(
+            Tag,
+            pk=pk)
+        posts = Post.objects.filter(tags__tag_id=tag.tag_id)
+
+        if posts.count() > 0:
+            return render(
+                request,
+                'app_info/tag_refuse_delete.html',
+                {'tag': tag,
+                 'posts': posts,
+                 }
+            )
+        else:
+            return render(
+                request,
+                'app_info/tag_confirm_delete.html',
+                {'tag': tag}
+            )
 
 
 class BeltList(ListView):
@@ -265,11 +333,21 @@ class BeltPromotionPostCreate(LoginRequiredMixin, PermissionRequiredMixin, Creat
     model = BeltPromotionPost
     permission_required = ''
 
+    def form_valid(self, form):
+        form.instance.profile = self.request.user
+        return super().form_valid(form)
+
 
 class BeltPromotionPostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = BeltPromotionPostForm
     model = BeltPromotionPost
     template_name = 'app_info/beltpromotionpost_form_update.html'
+    permission_required = ''
+
+
+class BeltPromotionPostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = BeltPromotionPost
+    success_url = reverse_lazy('app_info_belt_promotion_post_list_urlpattern')
     permission_required = ''
 
 
@@ -287,7 +365,7 @@ class TechniqueDetail(DetailView):
         name = technique.name
         tag = technique.tag
         description = technique.description
-        link = technique.instructional_link
+        link = technique.youtube_embed_link
 
         context['tag'] = tag
         context['name'] = name
@@ -310,11 +388,7 @@ class TechniqueUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ''
 
 
-# class CommentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-#     form_class = CommentForm
-#     model = Comment
-#     template_name = 'app_info/comment_form_update.html'
-#     permission_required = ''
-#
-#     def get_success_url(self):
-#         return reverse_lazy('app_info_post_detail_urlpattern', kwargs={'pk': self.})
+class TechniqueDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Technique
+    success_url = reverse_lazy('app_info_technique_list_urlpattern')
+    permission_required = ''

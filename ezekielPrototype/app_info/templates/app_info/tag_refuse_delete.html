@@ -1,0 +1,25 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Error Deleting Tag
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Tag</h2>
+        <p>
+            You may not delete tag {{ tag }}.  This
+            tag is currently being used by the following posts:
+        </p>
+
+        <ul>
+            {% for post in posts %}
+            <li><a href="{{ post.get_absolute_url }}">{{ post }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'app_info_tag_list_urlpattern' %}">Tag List</a>.
+        </p>
+    </div>
+{% endblock %}

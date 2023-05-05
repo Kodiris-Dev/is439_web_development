@@ -52,7 +52,7 @@ class BeltPromotionPostForm(ModelForm):
     class Meta:
         model = BeltPromotionPost
         fields = '__all__'
-        exclude = ('created_at', 'updated_at', 'likes')
+        exclude = ('created_at', 'updated_at', 'likes', 'profile')
 
         def clean_text(self):
             return self.cleaned_data['text'].strip()

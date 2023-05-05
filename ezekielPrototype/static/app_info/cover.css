@@ -30,7 +30,7 @@ body {
   background-color: #333;
 }
 
-div, h2, h3, em, li, span, label, td, th {
+div, h2, h3, em, li, span, label, td, th, p {
   color: gainsboro;
 }
 

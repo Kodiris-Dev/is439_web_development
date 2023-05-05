@@ -19,7 +19,8 @@ from django.urls import path
 from app_info.views import ProfileList, ProfileDetail, PostList, PostDetail, CategoryList, CategoryDetail, TagList, \
     TagDetail, BeltList, BeltDetail, BeltPromotionPostList, BeltPromotionPostDetail, TechniqueList, TechniqueDetail, \
     BeltCreate, CategoryCreate, ProfileCreate, TagCreate, BeltPromotionPostCreate, TechniqueCreate, PostCreate, \
-    ProfileUpdate, CategoryUpdate, TagUpdate, BeltUpdate, BeltPromotionPostUpdate, TechniqueUpdate, PostUpdate
+    ProfileUpdate, CategoryUpdate, TagUpdate, BeltUpdate, BeltPromotionPostUpdate, TechniqueUpdate, PostUpdate, \
+    PostDelete, ProfileDelete, BeltPromotionPostDelete, TechniqueDelete, CategoryDelete, TagDelete
 
 urlpatterns = [
     path('profiles/',
@@ -34,6 +35,9 @@ urlpatterns = [
     path('profiles/<int:pk>/update/',
          ProfileUpdate.as_view(),
          name='app_info_profile_update_urlpattern'),
+    path('profiles/<int:pk>/delete/',
+         ProfileDelete.as_view(),
+         name='app_info_profile_delete_urlpattern'),
     path('all_posts/',
          PostList.as_view(),
          name='app_info_post_list_urlpattern'),
@@ -46,18 +50,24 @@ urlpatterns = [
     path('posts/<int:pk>/update/',
          PostUpdate.as_view(),
          name='app_info_post_update_urlpattern'),
+    path('posts/<int:pk>/delete/',
+         PostDelete.as_view(),
+         name='app_info_post_delete_urlpattern'),
     path('categories/',
          CategoryList.as_view(),
-         name='app_info_categories_list_urlpattern'),
+         name='app_info_category_list_urlpattern'),
     path('categories/<int:pk>/',
          CategoryDetail.as_view(),
-         name='app_info_categories_detail_urlpattern'),
+         name='app_info_category_detail_urlpattern'),
     path('categories/create/',
          CategoryCreate.as_view(),
          name='app_info_category_create_urlpattern'),
     path('categories/<int:pk>/update/',
          CategoryUpdate.as_view(),
          name='app_info_category_update_urlpattern'),
+    path('categories/<int:pk>/delete/',
+         CategoryDelete.as_view(),
+         name='app_info_category_delete_urlpattern'),
     path('tags/',
          TagList.as_view(),
          name='app_info_tag_list_urlpattern'),
@@ -70,6 +80,9 @@ urlpatterns = [
     path('tags/<int:pk>/update/',
          TagUpdate.as_view(),
          name='app_info_tag_update_urlpattern'),
+    path('tags/<int:pk>/delete/',
+         TagDelete.as_view(),
+         name='app_info_tag_delete_urlpattern'),
     path('belts/',
          BeltList.as_view(),
          name='app_info_belt_list_urlpattern'),
@@ -94,6 +107,9 @@ urlpatterns = [
     path('belt_promotions/<int:pk>/update/',
          BeltPromotionPostUpdate.as_view(),
          name='app_info_belt_promotion_post_update_urlpattern'),
+    path('belt_promotions/<int:pk>/delete/',
+         BeltPromotionPostDelete.as_view(),
+         name='app_info_belt_promotion_post_delete_urlpattern'),
     path('techniques/',
          TechniqueList.as_view(),
          name='app_info_technique_list_urlpattern'),
@@ -106,4 +122,7 @@ urlpatterns = [
     path('technique/<int:pk>/update/',
          TechniqueUpdate.as_view(),
          name='app_info_technique_update_urlpattern'),
+    path('technique/<int:pk>/delete/',
+         TechniqueDelete.as_view(),
+         name='app_info_technique_delete_urlpattern'),
 ]

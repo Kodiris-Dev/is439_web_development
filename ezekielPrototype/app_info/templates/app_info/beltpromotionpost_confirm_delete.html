@@ -1,0 +1,21 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Delete Belt Promotion Post
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ beltpromotionpost.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            belt promotion post {{ beltpromotionpost }}?
+        </p>
+        <a href="{{ beltpromotionpost.get_absolute_url }}"
+            class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Belt Promotion Post</button>
+    </form>
+{% endblock %}

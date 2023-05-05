@@ -1,11 +1,11 @@
 {% extends 'app_info/base.html' %}
 
 {% block title %}
-    {{ technique.name }}
+    {{ name }}
 {% endblock %}
 
 {% block content %}
-    <h2>{{ technique.name }}</h2>
+    <h2>{{ name }}</h2>
     <ul class="inline">
 {#        {% if perms.courseinfo.change_course %}#}
         <li>
@@ -17,13 +17,13 @@
 {#        {% if perms.courseinfo.delete_course %}#}
         <li>
           <a
-{#              href="{{ course.get_delete_url }}"#}
+              href="{{ technique.get_delete_url }}"
               class="button button-primary">
             Delete Technique</a></li>
 {#        {% endif %}#}
     </ul>
     <section>
-        <div>{{ technique.tag }}</div>
-        <div>Description: {{ technique.description }}</div>
-        <iframe width="560" height="315" src="{{ technique.instructional_link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>    </section>
+        <div>{{ tag }}</div>
+        <div>Description: {{ description }}</div>
+        <iframe width="560" height="315" src="{{ link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>    </section>
 {% endblock %}

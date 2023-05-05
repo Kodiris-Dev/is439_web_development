@@ -32,7 +32,6 @@ class Belt(models.Model):
 
 
 class Profile(AbstractUser):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
@@ -54,10 +53,10 @@ class Profile(AbstractUser):
                        kwargs={'pk': self.pk}
                        )
 
-    # def get_delete_url(self):
-    #     return reverse('app_info_profile_delete_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_delete_url(self):
+        return reverse('app_info_profile_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['first_name']
@@ -80,10 +79,10 @@ class Tag(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
-    # def get_delete_url(self):
-    #     return reverse('app_info_profile_delete_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_delete_url(self):
+        return reverse('app_info_tag_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['name']
@@ -97,7 +96,7 @@ class Category(models.Model):
         return '%s' % (self.name)
 
     def get_absolute_url(self):
-        return reverse('app_info_categories_detail_urlpattern',
+        return reverse('app_info_category_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
@@ -106,10 +105,10 @@ class Category(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
-    # def get_delete_url(self):
-    #     return reverse('app_info_profile_delete_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_delete_url(self):
+        return reverse('app_info_category_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['name']
@@ -125,7 +124,7 @@ class Post(models.Model):
     title = models.CharField(max_length=45)
     subtitle = models.CharField(max_length=45)
     profile = models.ForeignKey(Profile, related_name='posts', on_delete=models.CASCADE)
-    categories = models.ForeignKey(Category, related_name='posts', on_delete=models.CASCADE)
+    categories = models.ForeignKey(Category, related_name='posts', on_delete=models.PROTECT)
     tags = models.ManyToManyField(Tag)
 
     def __str__(self):
@@ -141,10 +140,10 @@ class Post(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
-    # def get_delete_url(self):
-    #     return reverse('app_info_profile_delete_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_delete_url(self):
+        return reverse('app_info_post_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['title']
@@ -153,8 +152,8 @@ class Post(models.Model):
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     text = models.TextField(default='')
-    profile = models.ForeignKey(Profile, related_name='comments', on_delete=models.PROTECT)
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.PROTECT)
+    profile = models.ForeignKey(Profile, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
 
     def __str__(self):
@@ -172,7 +171,7 @@ class BeltPromotionPost(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.IntegerField(default=0)
     profile = models.ForeignKey(Profile, related_name='belt_promotion_posts', on_delete=models.CASCADE)
-    belt = models.ForeignKey(Belt, related_name="belt_promotion_posts", on_delete=models.CASCADE)
+    belt = models.ForeignKey(Belt, related_name="belt_promotion_posts", on_delete=models.PROTECT)
 
     def __str__(self):
         return '%s, %s' % (self.profile, self.belt)
@@ -187,10 +186,10 @@ class BeltPromotionPost(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
-    # def get_delete_url(self):
-    #     return reverse('app_info_profile_delete_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_delete_url(self):
+        return reverse('app_info_belt_promotion_post_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['belt']
@@ -216,10 +215,10 @@ class Technique(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
-    # def get_delete_url(self):
-    #     return reverse('app_info_profile_delete_urlpattern',
-    #                    kwargs={'pk': self.pk}
-    #                    )
+    def get_delete_url(self):
+        return reverse('app_info_technique_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['name']
