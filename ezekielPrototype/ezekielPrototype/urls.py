@@ -17,9 +17,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView, TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(
+        pattern_name='home_urlpattern',
+        permanent=False
+    )),
+    path('home/',
+         TemplateView.as_view(
+             template_name='app_info/home.html'),
+         name='home_urlpattern'
+         ),
     path('', include('app_info.urls'))
 ]
 

@@ -1,0 +1,18 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Techniques
+{% endblock %}
+
+{% block content %}
+<h2>Technique List</h2>
+<ul>
+    {% for technique in technique_list %}
+    <li>
+        <a href="{{ technique.get_absolute_url }}">{{ technique }}</a>
+    </li>
+    {% empty %}
+    <li><em>There are currently no techniques available</em></li>
+    {% endfor %}
+</ul>
+{% endblock %}

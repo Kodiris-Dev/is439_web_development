@@ -1,0 +1,26 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Tags
+{% endblock %}
+
+{% block content %}
+<h2>Tag List</h2>
+{% block create_button %}
+{#    {% if perms.courseinfo.add_instructor %}#}
+    <a
+            href="{% url 'app_info_tag_create_urlpattern' %}"
+            class="button button-primary">
+        Create New Tag</a>
+{#    {% endif %}#}
+{% endblock %}
+<ul>
+    {% for tag in tag_list %}
+    <li>
+        <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+    </li>
+    {% empty %}
+    <li><em>There are currently no tags available</em></li>
+    {% endfor %}
+</ul>
+{% endblock %}

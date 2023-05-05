@@ -1,0 +1,17 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Create Profile
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'app_info_profile_create_urlpattern'%}"
+        enctype='multipart/form-data'
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+        Create Profile</button>
+    </form>
+{% endblock %}

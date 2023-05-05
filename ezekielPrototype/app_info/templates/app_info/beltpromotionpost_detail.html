@@ -1,0 +1,20 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    {{ beltpromotionpost.belt }}: {{ beltpromotionpost.profile }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ beltpromotionpost.belt }}: {{ beltpromotionpost.profile }}</h2>
+
+    <section>
+        <div>{{ beltpromotionpost.created_at }}</div>
+        <div>{{ beltpromotionpost.likes }}</div>
+
+        <img src="{{ beltpromotionpost.image.url }}" class="img-responsive" style="width: 10%; float: left; margin-right: 10px;" />
+
+        <div>
+            {{ beltpromotionpost.text}}
+        </div>
+    </section>
+{% endblock %}

@@ -1,22 +1,29 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
 
-class BeltColor(models.Model):
-    belt_color_id = models.AutoField(primary_key=True)
+class Belt(models.Model):
+    belt_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45)
 
     def __str__(self):
         return '%s' % (self.name)
 
+    def get_absolute_url(self):
+        return reverse('app_info_belt_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+
     class Meta:
         ordering = ['name']
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Profile(AbstractUser):
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_id = models.AutoField(primary_key=True)
     displayName = models.CharField(max_length=45, default="")
     first_name = models.CharField(max_length=45)
@@ -24,7 +31,7 @@ class Profile(models.Model):
     join_date = models.DateTimeField(default=timezone.now)
     profile_picture = models.ImageField(default="")
     banner_picture = models.ImageField(default="")
-    belt_color = models.ForeignKey(BeltColor, related_name='profiles', on_delete=models.PROTECT)
+    belt = models.ForeignKey(Belt, related_name='profiles', on_delete=models.PROTECT)
 
     def __str__(self):
         return '%s, %s' % (self.first_name, self.last_name)
@@ -44,6 +51,11 @@ class Tag(models.Model):
 
     def __str__(self):
         return '%s' % (self.name)
+
+    def get_absolute_url(self):
+        return reverse('app_info_tag_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         ordering = ['name']
@@ -103,10 +115,44 @@ class Comment(models.Model):
     class Meta:
         ordering = ['text']
 
-#
-# class PostTag(models.Model):
-#     tag = models.ForeignKey(Tag, related_name='postTags', on_delete=models.CASCADE)
-#     post = models.ForeignKey(Post, related_name='postTags', on_delete=models.CASCADE)
+
+class BeltPromotionPost(models.Model):
+    belt_promotion_post_id = models.AutoField(primary_key=True)
+    text = models.TextField()
+    image = models.ImageField(default="")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    likes = models.IntegerField()
+    profile = models.ForeignKey(Profile, related_name='belt_promotion_posts', on_delete=models.CASCADE)
+    belt = models.ForeignKey(Belt, related_name="belt_promotion_posts", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s, %s' % (self.profile, self.belt)
+
+    def get_absolute_url(self):
+        return reverse('app_info_belt_promotion_post_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    class Meta:
+        ordering = ['belt']
 
 
+class Technique(models.Model):
+    technique_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=45)
+    description = models.TextField(default='')
+    instructional_link = models.URLField()
+    tag = models.ForeignKey(Tag, related_name='techniques', on_delete=models.PROTECT)
+
+    def __str__(self):
+        return '%s' % (self.name)
+
+    def get_absolute_url(self):
+        return reverse('app_info_technique_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    class Meta:
+        ordering = ['name']
 

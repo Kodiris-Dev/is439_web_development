@@ -1,0 +1,21 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Belt Promotions Post List
+{% endblock %}
+
+{% block content %}
+<h2>Belt Promotions Post List</h2>
+<h3>By Belt Color</h3>
+<ul>
+    {% for belt_promotion in beltpromotionpost_list %}
+    <li>
+        <a href="{{ belt_promotion.get_absolute_url }}">{{ belt_promotion.belt }}: {{ belt_promotion.profile }}</a>
+        <img src="{{ belt_promotion.image.url }}" class="img-responsive" style="width: 10%; float: left; margin-right: 10px;" />
+
+    </li>
+    {% empty %}
+    <li><em>There are currently no belt promotions available</em></li>
+    {% endfor %}
+</ul>
+{% endblock %}

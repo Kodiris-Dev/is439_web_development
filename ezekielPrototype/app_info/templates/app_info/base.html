@@ -1,11 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+
+
     <title>
         {% block title %}
-            title is provided by inheriting templates
+            EZEKIEL
         {% endblock %}
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,36 +19,70 @@
     <!--[if IE]><script
       src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
     </script><![endif]-->
+        <link rel="stylesheet" type="text/css"
+          href="{% static 'app_info/cover.css' %}">
+    {% block head %}{% endblock %}
+
 </head>
 
 <body>
 
-<div><!-- start of container -->
-    <header>
-        <h1>EZEKIEL</h1>
-        <h2>The Cohesive Brazilian Jiu Jitsu Social Media Platform</h2>
-    </header>
-    <nav>
-        <ul>
-            <li>
-                <a href="{% url 'app_info_profile_list_urlpattern' %}">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+            <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app_info_profile_list_urlpattern' %}">
                     Profiles</a></li>
-            <li>
-                <a href="{% url 'app_info_post_list_urlpattern' %}">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app_info_post_list_urlpattern' %}">
                     All Posts</a>
             </li>
-            <li>
-                <a href="{% url 'app_info_categories_list_urlpattern' %}">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app_info_categories_list_urlpattern' %}">
                     Categories</a>
             </li>
-        </ul>
-    </nav>
-    <main>
-        {% block content %}
-            This is default content!
-        {% endblock %}
-    </main>
-</div><!-- end of container -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app_info_tag_list_urlpattern' %}">
+                    Tags</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app_info_belt_list_urlpattern' %}">
+                    Belts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app_info_belt_promotion_post_list_urlpattern' %}">
+                    Belt Promotions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'app_info_technique_list_urlpattern' %}">
+                    Techniques</a>
+            </li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto" href="/">EZEKIEL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'app_info_profile_create_urlpattern'%}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+{% block content %}
+    This is default content!
+{% endblock %}
 
 </body>
 </html>

@@ -1,0 +1,16 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Create Belt
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'app_info_belt_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+        Create Belt</button>
+    </form>
+{% endblock %}

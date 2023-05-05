@@ -1,0 +1,27 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    {{ belt.name }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ belt.name }} Belt Profiles:</h2>
+
+    <section>
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        {% for profile in profiles %}
+                        <li>
+                            <a href="{{ profile.get_absolute_url }}">{{ profile.first_name }} {{ profile.last_name }}</a>
+                        </li>
+                        {% empty %}
+                        <li><em>There are no profiles for this belt</em></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </section>
+{% endblock %}

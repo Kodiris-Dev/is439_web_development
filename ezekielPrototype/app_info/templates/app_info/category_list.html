@@ -6,6 +6,14 @@
 
 {% block content %}
 <h2>Category List</h2>
+{% block create_button %}
+{#    {% if perms.courseinfo.add_instructor %}#}
+    <a
+            href="{% url 'app_info_category_create_urlpattern' %}"
+            class="button button-primary">
+        Create New Category</a>
+{#    {% endif %}#}
+{% endblock %}
 <ul>
     {% for category in category_list %}
     <li>

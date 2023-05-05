@@ -1,0 +1,26 @@
+{% extends 'app_info/base.html' %}
+
+{% block title %}
+    Belts
+{% endblock %}
+
+{% block content %}
+<h2>Belt List</h2>
+{% block create_button %}
+{#    {% if perms.courseinfo.add_instructor %}#}
+    <a
+            href="{% url 'app_info_belt_create_urlpattern' %}"
+            class="button button-primary">
+        Create New Belt</a>
+{#    {% endif %}#}
+{% endblock %}
+<ul>
+    {% for belt in belt_list %}
+    <li>
+        <a href="{{ belt.get_absolute_url }}">{{ belt }}</a>
+    </li>
+    {% empty %}
+    <li><em>There are currently no belts available</em></li>
+    {% endfor %}
+</ul>
+{% endblock %}
