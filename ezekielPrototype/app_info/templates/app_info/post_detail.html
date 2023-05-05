@@ -8,7 +8,22 @@
     <section class="page-content">
     <h2>{{ post.title }}</h2>
     <h3>{{ post.subtitle }}</h3>
-
+    <ul class="inline">
+{#        {% if perms.courseinfo.change_course %}#}
+        <li>
+          <a
+              href="{{ post.get_update_url }}"
+              class="button button-primary">
+            Edit Post</a></li>
+{#        {% endif %}#}
+{#        {% if perms.courseinfo.delete_course %}#}
+        <li>
+          <a
+{#              href="{{ course.get_delete_url }}"#}
+              class="button button-primary">
+            Delete Post</a></li>
+{#        {% endif %}#}
+    </ul>
     <section>
         <table>
             <tr>

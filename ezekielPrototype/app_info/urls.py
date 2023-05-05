@@ -19,7 +19,7 @@ from django.urls import path
 from app_info.views import ProfileList, ProfileDetail, PostList, PostDetail, CategoryList, CategoryDetail, TagList, \
     TagDetail, BeltList, BeltDetail, BeltPromotionPostList, BeltPromotionPostDetail, TechniqueList, TechniqueDetail, \
     BeltCreate, CategoryCreate, ProfileCreate, TagCreate, BeltPromotionPostCreate, TechniqueCreate, PostCreate, \
-    ProfileUpdate, CategoryUpdate, TagUpdate, BeltUpdate, BeltPromotionPostUpdate, TechniqueUpdate
+    ProfileUpdate, CategoryUpdate, TagUpdate, BeltUpdate, BeltPromotionPostUpdate, TechniqueUpdate, PostUpdate
 
 urlpatterns = [
     path('profiles/',
@@ -43,6 +43,9 @@ urlpatterns = [
     path('posts/create/',
          PostCreate.as_view(),
          name='app_info_post_create_urlpattern'),
+    path('posts/<int:pk>/update/',
+         PostUpdate.as_view(),
+         name='app_info_post_update_urlpattern'),
     path('categories/',
          CategoryList.as_view(),
          name='app_info_categories_list_urlpattern'),

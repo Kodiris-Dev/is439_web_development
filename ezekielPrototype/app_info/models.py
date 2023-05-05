@@ -136,6 +136,16 @@ class Post(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_update_url(self):
+        return reverse('app_info_post_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    # def get_delete_url(self):
+    #     return reverse('app_info_profile_delete_urlpattern',
+    #                    kwargs={'pk': self.pk}
+    #                    )
+
     class Meta:
         ordering = ['title']
 

@@ -62,6 +62,8 @@ class PostList(ListView):
 class PostDetail(FormMixin, DetailView):
     model = Post
     form_class = CommentForm
+    # template_name = 'app_info/comment_form_update.html'
+
 
     def get_success_url(self):
         return reverse_lazy('app_info_post_detail_urlpattern', kwargs={'pk': self.object.pk})
@@ -120,6 +122,13 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.profile = self.request.user
         return super().form_valid(form)
+
+
+class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    form_class = PostForm
+    model = Post
+    template_name = 'app_info/post_form_update.html'
+    permission_required = ''
 
 
 class CategoryList(ListView):
@@ -299,3 +308,13 @@ class TechniqueUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Technique
     template_name = 'app_info/technique_form_update.html'
     permission_required = ''
+
+
+# class CommentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+#     form_class = CommentForm
+#     model = Comment
+#     template_name = 'app_info/comment_form_update.html'
+#     permission_required = ''
+#
+#     def get_success_url(self):
+#         return reverse_lazy('app_info_post_detail_urlpattern', kwargs={'pk': self.})
